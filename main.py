@@ -16,11 +16,11 @@ for filepath in filepaths:
     invoice_nr, invoice_date = filename.split("-")
 
     # input invoice info
-    pdf.set_font(family="Times", style="B", size=24)
+    pdf.set_font(family="Times", style="B", size=20)
     pdf.cell(w=50, h=8, txt=f"Invoice nr.{invoice_nr}", ln=1)
 
     # input date info
-    pdf.set_font(family="Times", style="B", size=24)
+    pdf.set_font(family="Times", style="B", size=18)
     pdf.cell(w=50, h=8, txt=f"Date: {invoice_date}", ln=1)
 
     # Read data
@@ -45,5 +45,25 @@ for filepath in filepaths:
         pdf.cell(w=40, h=8, txt=str(row["amount_purchased"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]), border=1, ln=1)
+
+    # Add the sum for total price
+    total_sum = df["total_price"].sum()
+    pdf.set_font(family="Times", size=10)
+    pdf.set_text_color(80, 80, 80)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=50, h=8, txt="", border=1)
+    pdf.cell(w=40, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt=str(total_sum), border=1, ln=1)
+
+    # Add text for total sum
+    pdf.set_font(family="Times", size=12, style="B")
+    pdf.set_text_color(0, 0, 0)
+    pdf.cell(w=30, h=8, txt=f"The total amount due is ${total_sum}", ln=1)
+
+    # Add logo
+    pdf.set_font(family="Times", size=14, style="B")
+    pdf.cell(w=26, h=8, txt="PythonHow ")
+    pdf.image("pythonhow.png", w=8)
 
     pdf.output(f"PDFs/{filename}.pdf")
