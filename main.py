@@ -18,10 +18,12 @@ for filepath in filepaths:
     # input invoice info
     pdf.set_font(family="Times", style="B", size=20)
     pdf.cell(w=50, h=8, txt=f"Invoice nr.{invoice_nr}", ln=1)
+    pdf.cell(w=10, h=4, txt=" ", ln=1)
 
     # input date info
     pdf.set_font(family="Times", style="B", size=18)
     pdf.cell(w=50, h=8, txt=f"Date: {invoice_date}", ln=1)
+    pdf.cell(w=10, h=4, txt=" ", ln=1)
 
     # Read data
     df = pd.read_excel(filepath, sheet_name="Sheet 1")
@@ -55,13 +57,14 @@ for filepath in filepaths:
     pdf.cell(w=40, h=8, txt="", border=1)
     pdf.cell(w=30, h=8, txt="", border=1)
     pdf.cell(w=30, h=8, txt=str(total_sum), border=1, ln=1)
+    pdf.cell(w=10, h=4, txt=" ", ln=1)
 
-    # Add text for total sum
+    # Add total sum sentence
     pdf.set_font(family="Times", size=12, style="B")
     pdf.set_text_color(0, 0, 0)
     pdf.cell(w=30, h=8, txt=f"The total amount due is ${total_sum}", ln=1)
 
-    # Add logo
+    # Add company name, logo
     pdf.set_font(family="Times", size=14, style="B")
     pdf.cell(w=26, h=8, txt="PythonHow ")
     pdf.image("pythonhow.png", w=8)
