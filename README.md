@@ -1,2 +1,6 @@
 # what is this project
-this is an app that created PDF invoices out of Excel pages.
+This code reads data from multiple Excel files in the "invoices" directory,
+processes each file, and generates a separate PDF invoice for each,
+including invoice details, a table of products, total price,
+and company information. 
+The resulting PDF files are saved in the "PDFs" directory.
